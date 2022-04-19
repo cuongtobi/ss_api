@@ -1,0 +1,30 @@
+{
+    "name": "cuongtobi/ss_api",
+    "description": "A Super Simple API",
+    "keywords": [
+        "microframework",
+        "rest",
+        "router"
+    ],
+    "homepage": "https://cuongtobi.github.io",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Vuong Cuong",
+            "email": "cuongtobi29@gmail.com",
+            "homepage": "https://cuongtobi.github.io"
+        }
+    ],
+    "require": {
+        "vlucas/phpdotenv": "^5.4"
+    },
+    "autoload": {
+        "psr-4": {
+            "App\\": "src/"
+        }
+    },
+    "scripts": {
+        "start": "php -S localhost:8081 -t public",
+        "test": "phpunit"
+    }
+}
