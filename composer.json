@@ -28,6 +28,6 @@
     },
     "scripts": {
         "start": "php -S localhost:8081 -t public",
-        "test": "phpunit"
+        "convention": "vendor/bin/phpcs"
     }
 }
