@@ -1,8 +1,9 @@
 <?php
 namespace App\Handlers;
 
-class HttpHandler {
-    public const HTTP_HEADERS = array(
+class HttpHandler
+{
+    public const HTTP_HEADERS = [
         100 => 'HTTP/1.1 100 Continue',
         101 => 'HTTP/1.1 101 Switching Protocols',
         200 => 'HTTP/1.1 200 OK',
@@ -43,32 +44,35 @@ class HttpHandler {
         503 => 'HTTP/1.1 503 Service Unavailable',
         504 => 'HTTP/1.1 504 Gateway Time-out',
         505 => 'HTTP/1.1 505 HTTP Version Not Supported',
-    );
+    ];
 
-    public function notFoundResponse() {
-        return array(
+    public function notFoundResponse()
+    {
+        return [
             'statusCode' => 404,
-            'body' => array(
+            'body' => [
                 'message' => 'Not Found.',
-            ),
-        );
+            ],
+        ];
     }
 
-    public function methodNotAllowedResponse() {
-        return array(
+    public function methodNotAllowedResponse()
+    {
+        return [
             'statusCode' => 405,
-            'body' => array(
+            'body' => [
                 'message' => 'Method not allowed.',
-            ),
-        );
+            ],
+        ];
     }
 
-    public function internalServerErrorResponse() {
-        return array(
+    public function internalServerErrorResponse()
+    {
+        return [
             'statusCode' => 500,
-            'body' => array(
+            'body' => [
                 'message' => 'Internal Server Error.',
-            ),
-        );
+            ],
+        ];
     }
 }

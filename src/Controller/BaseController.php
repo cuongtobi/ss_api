@@ -3,18 +3,21 @@ namespace App\Controller;
 
 use App\Handlers\HttpHandler;
 
-class BaseController {
+class BaseController
+{
     protected $id;
     protected $requestMethod;
     protected $httpHandler;
 
-    public function __construct($requestMethod, $id = null) {
+    public function __construct($requestMethod, $id = null)
+    {
         $this->httpHandler = new HttpHandler;
         $this->requestMethod = $requestMethod;
         $this->id = $id;
     }
 
-    public function handle() {
+    public function handle()
+    {
         switch ($this->requestMethod) {
             case 'GET':
                 if ($this->id) {
@@ -44,23 +47,28 @@ class BaseController {
         }
     }
 
-    protected function index() {
+    protected function index()
+    {
         return $this->httpHandler->methodNotAllowedResponse();
     }
 
-    protected function show($id) {
+    protected function show($id)
+    {
         return $this->httpHandler->methodNotAllowedResponse();
     }
 
-    protected function create() {
+    protected function create()
+    {
         return $this->httpHandler->methodNotAllowedResponse();
     }
 
-    protected function update() {
+    protected function update()
+    {
         return $this->httpHandler->methodNotAllowedResponse();
     }
 
-    protected function delete() {
+    protected function delete()
+    {
         return $this->httpHandler->methodNotAllowedResponse();
     }
 }
