@@ -1,7 +1,8 @@
 <?php
 namespace App\Model;
 
-class BaseModel {
+class BaseModel
+{
     protected $databaseConnection;
 
     public function __construct($databaseConnection)
@@ -54,7 +55,9 @@ class BaseModel {
 
     protected function insertRecord($input, $fields, $tableName)
     {
-        $fillFields = array_map(function ($f) { return ':' . $f; }, $fields);
+        $fillFields = array_map(function ($f) {
+            return ':' . $f;
+        }, $fields);
         $fillFields = implode(', ', $fillFields);
         $fields = implode(', ', $fields);
 
