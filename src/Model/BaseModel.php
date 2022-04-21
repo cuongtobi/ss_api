@@ -51,4 +51,27 @@ class BaseModel {
             exit($e->getMessage());
         }
     }
+
+    protected function insertRecord($input, $fields, $tableName)
+    {
+        $fillFields = array_map(function ($f) { return ':' . $f; }, $fields);
+        $fillFields = implode(', ', $fillFields);
+        $fields = implode(', ', $fields);
+
+        $statement = "
+            INSERT INTO $tableName
+                ($fields)
+            VALUES
+                ($fillFields);
+        ";
+
+        try {
+            $statement = $this->databaseConnection->prepare($statement);
+            $statement->execute($input);
+
+            return $statement->rowCount();
+        } catch (\PDOException $e) {
+            exit($e->getMessage());
+        }
+    }
 }

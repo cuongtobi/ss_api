@@ -18,25 +18,11 @@ class UserModel extends BaseModel
 
     public function insert(Array $input)
     {
-        $statement = "
-            INSERT INTO users
-                (firstname, lastname, parent_id)
-            VALUES
-                (:firstname, :lastname, :parent_id);
-        ";
-
-        try {
-            $statement = $this->databaseConnection->prepare($statement);
-            $statement->execute([
-                'firstname' => $input['firstname'],
-                'lastname' => $input['lastname'],
-                'parent_id' => $input['parent_id'] ?? null,
-            ]);
-
-            return $statement->rowCount();
-        } catch (\PDOException $e) {
-            exit($e->getMessage());
-        }
+        return $this->insertRecord(
+            $input,
+            ['firstname', 'lastname', 'parent_id'],
+            $this->tableName
+        );
     }
 
     public function update($id, Array $input)
