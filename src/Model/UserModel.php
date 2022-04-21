@@ -1,53 +1,19 @@
 <?php
 namespace App\Model;
 
-class UserModel
+class UserModel extends BaseModel
 {
-    private $db;
-
-    public function __construct($db)
-    {
-        $this->db = $db;
-    }
+    private $tableName = 'users';
+    private $defaultFields = ['id', 'firstname', 'lastname', 'parent_id'];
 
     public function findAll()
     {
-        $statement = "
-            SELECT 
-                id, firstname, lastname, parent_id
-            FROM
-                users;
-        ";
-
-        try {
-            $statement = $this->db->query($statement);
-            $result = $statement->fetchAll(\PDO::FETCH_ASSOC);
-
-            return $result;
-        } catch (\PDOException $e) {
-            exit($e->getMessage());
-        }
+        return $this->selectAll($this->defaultFields, $this->tableName);
     }
 
     public function find($id)
     {
-        $statement = "
-            SELECT 
-                id, firstname, lastname, parent_id
-            FROM
-                users
-            WHERE id = ?;
-        ";
-
-        try {
-            $statement = $this->db->prepare($statement);
-            $statement->execute([$id]);
-            $result = $statement->fetchAll(\PDO::FETCH_ASSOC);
-
-            return $result;
-        } catch (\PDOException $e) {
-            exit($e->getMessage());
-        }
+        return $this->selectOne($id, $this->defaultFields, $this->tableName);
     }
 
     public function insert(Array $input)
@@ -60,7 +26,7 @@ class UserModel
         ";
 
         try {
-            $statement = $this->db->prepare($statement);
+            $statement = $this->databaseConnection->prepare($statement);
             $statement->execute([
                 'firstname' => $input['firstname'],
                 'lastname' => $input['lastname'],
@@ -85,7 +51,7 @@ class UserModel
         ";
 
         try {
-            $statement = $this->db->prepare($statement);
+            $statement = $this->databaseConnection->prepare($statement);
 
             $statement->execute([
                 'id' => $id,
@@ -108,7 +74,7 @@ class UserModel
         ";
 
         try {
-            $statement = $this->db->prepare($statement);
+            $statement = $this->databaseConnection->prepare($statement);
             $statement->execute(['id' => $id]);
 
             return $statement->rowCount();
