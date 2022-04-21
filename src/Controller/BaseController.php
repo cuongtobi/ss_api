@@ -62,12 +62,12 @@ class BaseController
         return $this->httpHandler->methodNotAllowedResponse();
     }
 
-    protected function update()
+    protected function update($id)
     {
         return $this->httpHandler->methodNotAllowedResponse();
     }
 
-    protected function delete()
+    protected function delete($id)
     {
         return $this->httpHandler->methodNotAllowedResponse();
     }
