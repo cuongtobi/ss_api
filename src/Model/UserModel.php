@@ -27,45 +27,16 @@ class UserModel extends BaseModel
 
     public function update($id, Array $input)
     {
-        $statement = "
-            UPDATE users
-            SET 
-                firstname = :firstname,
-                lastname  = :lastname,
-                parent_id = :parent_id
-            WHERE id = :id;
-        ";
-
-        try {
-            $statement = $this->databaseConnection->prepare($statement);
-
-            $statement->execute([
-                'id' => $id,
-                'firstname' => $input['firstname'],
-                'lastname'  => $input['lastname'],
-                'parent_id' => $input['parent_id'] ?? null,
-            ]);
-
-            return $statement->rowCount();
-        } catch (\PDOException $e) {
-            exit($e->getMessage());
-        }
+        return $this->updateRecord(
+            $id,
+            $input,
+            ['firstname', 'lastname', 'parent_id'],
+            $this->tableName
+        );
     }
 
     public function delete($id)
     {
-        $statement = "
-            DELETE FROM users
-            WHERE id = :id;
-        ";
-
-        try {
-            $statement = $this->databaseConnection->prepare($statement);
-            $statement->execute(['id' => $id]);
-
-            return $statement->rowCount();
-        } catch (\PDOException $e) {
-            exit($e->getMessage());
-        }
+        return $this->deleteRecord($id, $this->tableName);
     }
 }
